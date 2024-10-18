@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: orders
+#  profiles:
+#    active: prod
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+#logging:
+#  level:
+#    org.springframework:
+#      core: TRACE
+
+management:
+  endpoints:
+    web:
+     exposure:
+       include: refresh, busrefresh

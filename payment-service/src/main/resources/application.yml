@@ -1,0 +1,18 @@
+server:
+  port: 8082
+spring:
+  config:
+    import: "configserver:http://localhost:8888"
+  application:
+    name: payments
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, busrefresh
