@@ -9,24 +9,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-@Component
+@Component("paymentProcessorClient")
 @RequiredArgsConstructor
-public class PaymentProcessorClient {
+public class PaymentProcessorClient implements PaymentClient {
     public final static String PAYMENT_SUCCESS_MESSAGE = "success";
     private final static String PAYMENT_SERVICE_URL = "http://localhost:8082/payments";
     private final RestTemplate restTemplate;
 
-    public PaymentServiceResponse processPayment(PaymentServiceRequest request) throws PaymentProcessingException {
-
+    @Override
+    public ResponseEntity<PaymentServiceResponse> processPayments(PaymentServiceRequest request) throws PaymentProcessingException {
         try {
-            ResponseEntity<PaymentServiceResponse> paymentServiceResponseResponseEntity =
-                    restTemplate.postForEntity(PAYMENT_SERVICE_URL, request, PaymentServiceResponse.class);
-
-            return paymentServiceResponseResponseEntity.getBody();
+            return restTemplate.postForEntity(PAYMENT_SERVICE_URL, request, PaymentServiceResponse.class);
         } catch (RestClientException e) {
             // Handle exceptions like timeouts or connection issues
             throw new PaymentProcessingException("Payment service failed", e);
         }
-
     }
 }

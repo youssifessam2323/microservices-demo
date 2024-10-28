@@ -33,4 +33,8 @@ public class OrderController {
         return ResponseEntity.ok("created successfully");
     }
 
+    @GetMapping("/app/info")
+    public ResponseEntity<?> getOrderAppInfo(){
+        return ResponseEntity.ok(orderConfigurationProperties);
+    }
 }

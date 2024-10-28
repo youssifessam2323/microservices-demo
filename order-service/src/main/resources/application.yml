@@ -10,13 +10,43 @@ spring:
     port: 5672
     username: guest
     password: guest
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled:
 #logging:
 #  level:
 #    org.springframework:
 #      core: TRACE
 
 management:
+
   endpoints:
     web:
      exposure:
-       include: refresh, busrefresh
+       include: refresh, busrefresh, info
+  endpoint:
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+endpoints:
+  shutdown:
+    enabled: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+
+info:
+  app:
+    name: "orders"
+    description: "an order microservice"
+    version: 1.0.0

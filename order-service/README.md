@@ -15,4 +15,58 @@
 ## Adding Spring Cloud monitor to support automatically changing the configuration using github webhooks
 1. Adding the spring cloud monitor dependency
 2. create new github webhook and adding the callback url that spring cloud monitor will provide (http://localhost:8080/monitor)
-3. 
+
+
+## Connecting with Eureka
+1. Adding the eureka client dependency
+2. adding the eureka configuration in the application.yml
+```
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+```
+- preferIpAddress: this tell eureka client to use the ip instead of host name
+3. Adding the following section to add info about the service when it registers with the service discovery
+```
+info:
+   app:
+    name: "orders"
+    description: "an order microservice"
+    version: 1.0.0
+
+```
+to enable this we need to add this under the actuator management section
+```
+management:
+    info:
+      env:
+        enabled: true
+```
+**Note:** this allows when we click on the instance in eureka dashboard to open /actuator/info to see this details 
+
+## Enable Shutdown actuator to gracefully shut down the service
+1. enable the shutdown actuator endpoint
+```
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+```
+2. adding this to  enable the shutdown in the service
+```
+endpoints:
+    shutdown:
+        enabled: true
+```
+
+
+## How to use Feign Client to communicate with the microservices
+1. adding the FeignClient dependency
+2. adding @EnableFeignClients on the main application
+3. NOTE: to add a qualifier to feign client use the @FeignClient "qualifiers" attributes add the name for your bean
+4. 

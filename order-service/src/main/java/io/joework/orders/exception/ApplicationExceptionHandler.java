@@ -12,6 +12,6 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleExceptions(Exception e){
       log.info(e.getMessage());
-      return ResponseEntity.badRequest().body("failed to process the request");
+      return ResponseEntity.badRequest().body("failed to process the request: " + e.getMessage());
     }
 }
