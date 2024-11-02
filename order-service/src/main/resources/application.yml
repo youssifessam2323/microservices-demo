@@ -10,10 +10,6 @@ spring:
     port: 5672
     username: guest
     password: guest
-  cloud:
-    openfeign:
-      circuitbreaker:
-        enabled:
 #logging:
 #  level:
 #    org.springframework:
@@ -50,3 +46,11 @@ info:
     name: "orders"
     description: "an order microservice"
     version: 1.0.0
+
+logging:
+  level:
+    org:
+      springframework:
+        context.annotation: DEBUG
+        cloud.openfeign: DEBUG
+
