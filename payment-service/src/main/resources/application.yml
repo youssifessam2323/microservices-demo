@@ -1,10 +1,10 @@
 server:
-  port: 8082
+  port: 0
 spring:
-  config:
-    import: "configserver:http://localhost:8888"
   application:
     name: payments
+  config:
+    import: "configserver:http://localhost:8889"
   rabbitmq:
     host: localhost
     port: 5672
@@ -30,14 +30,15 @@ management:
 eureka:
   instance:
     preferIpAddress: true
+    instance-id: ${spring.application.name}:${random.int}
   client:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://localhost:8070/eureka/
+      defaultZone: http://localhost:8072/eureka/
 
 info:
   app:
-    name: "payments"
+    name: "payments ${server.port}"
     description: "an payment microservice"
     version: 1.0.0
