@@ -69,4 +69,15 @@ endpoints:
 1. adding the FeignClient dependency
 2. adding @EnableFeignClients on the main application
 3. NOTE: to add a qualifier to feign client use the @FeignClient "qualifiers" attributes add the name for your bean
-4. 
+
+### NOTE: 
+ if you mentioned the configuration of the circuit breaker support of feign client
+ ```
+ spring:
+   cloud:
+    openfeign:
+      circuitbreaker:
+        <rest of configuration>
+ ```
+feign client won't register a bean of type org.springframework.cloud.openfeign.Targeter, so don't include the 
+configuration of feign circuit breaker unless you need to 
