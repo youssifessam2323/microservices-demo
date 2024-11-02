@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
@@ -18,6 +20,14 @@ public class OrderController {
 
     private final OrderService orderService;
     private final OrderConfigurationProperties orderConfigurationProperties;
+
+    @GetMapping
+    public ResponseEntity<List<Order>> getOrders(){
+        log.info("application version: {} ", orderConfigurationProperties.getVersion());
+        List<Order> orders = orderService.getOrders();
+        return ResponseEntity.ok(orders);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getOrderById(@PathVariable("id") int id){

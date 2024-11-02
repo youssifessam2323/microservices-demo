@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -49,5 +51,9 @@ public class OrderService {
     public Order getOrderById(int id) {
         return orderRepository.getOrderById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found..."));
+    }
+
+    public List<Order> getOrders() {
+        return orderRepository.getOrders();
     }
 }
