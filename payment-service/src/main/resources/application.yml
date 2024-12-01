@@ -1,6 +1,8 @@
 server:
-  port: 0
+  port: 8082
 spring:
+  profiles:
+    active: prod
   application:
     name: payments
   config:

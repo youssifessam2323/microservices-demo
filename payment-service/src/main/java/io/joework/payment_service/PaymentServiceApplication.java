@@ -8,10 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Random;
 
@@ -43,6 +40,11 @@ public class PaymentServiceApplication {
 			}
 			log.info("request failed...");
 			return ResponseEntity.badRequest().body(new PaymentServiceResponse("failed", "FAIL222", "transaction failed"));
+		}
+
+		@GetMapping("/app/info")
+		public ResponseEntity<?> getPaymentAppInfo(){
+			return ResponseEntity.ok(paymentConfigurationProperties);
 		}
 
 	}

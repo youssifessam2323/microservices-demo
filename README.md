@@ -1,3 +1,5 @@
+# This document contain notes that I take while practicing on building microservices following this course  https://dxc.udemy.com/course-dashboard-redirect/?course_id=3984552
+
 ## how to connect to spring cloud config server
 1. adding the dependency of spring cloud config client
 2. adding the spring cloud version and dependency management section
@@ -80,4 +82,8 @@ endpoints:
         <rest of configuration>
  ```
 feign client won't register a bean of type org.springframework.cloud.openfeign.Targeter, so don't include the 
-configuration of feign circuit breaker unless you need to 
+configuration of feign circuit breaker unless you need to
+
+
+### Health Information
+You can use health information to check the status of your running application. It is often used by monitoring software to alert someone when a production system goes down. The information exposed by the health endpoint depends on the **management.endpoint.health.show-details** property which can be configured with one of the following values:

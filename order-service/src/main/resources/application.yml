@@ -4,7 +4,7 @@ spring:
 #  profiles:
 #    active: prod
   config:
-    import: "optional:configserver:http://localhost:8888"
+    import: "optional:configserver:http://localhost:8889"
   rabbitmq:
     host: localhost
     port: 5672
@@ -20,8 +20,11 @@ management:
   endpoints:
     web:
      exposure:
-       include: refresh, busrefresh, info
+#       include: refresh, busrefresh, info
+        include: "*"
   endpoint:
+    health:
+      show-details: always
     shutdown:
       enabled: true
   info:
