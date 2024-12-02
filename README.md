@@ -1,4 +1,4 @@
-# This document contain notes that I take while practicing on building microservices following this course  https://dxc.udemy.com/course-dashboard-redirect/?course_id=3984552
+# This document contain notes that I take while practicing on building microservices
 
 ## how to connect to spring cloud config server
 1. adding the dependency of spring cloud config client
