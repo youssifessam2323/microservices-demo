@@ -54,9 +54,13 @@ logging:
   level:
     org:
       springframework:
+        http.server.reactive: DEBUG
+        web.reactive: DEBUG
         context.annotation: DEBUG
         cloud.openfeign: DEBUG
         cloud.netflix: DEBUG
+        cloud.gateway: DEBUG
+
 
 
 

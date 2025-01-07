@@ -5,6 +5,7 @@ import io.joework.orders.exception.PaymentProcessingException;
 import io.joework.orders.model.Order;
 import io.joework.orders.model.dto.OrderDto;
 import io.joework.orders.service.OrderService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,9 @@ public class OrderController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOrderById(@PathVariable("id") int id){
+    public ResponseEntity<?> getOrderById(@PathVariable("id") int id, HttpServletRequest request){
         log.info("application version: {} ", orderConfigurationProperties.getVersion());
+        log.info("request came from API gateway: {}", request.getHeader("X-Response-Time"));
         Order order = orderService.getOrderById(id);
         return ResponseEntity.ok(order);
     }
