@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: "gatewayserver" # name of the application for discovery service
+  config:
+    import: "optional:configserver:http://localhost:8071/" # connect with the config server
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false #disable using eureka default locator (example: http://edgeserver/<serviceId>) for locating microservices
+          lowerCaseServiceId: true #allow to use lowercase application name in our http requests.
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 10s
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #expose all the actuator endpoints
+  endpoint:
+    gateway:
+      access: read_only
+  info:
+    env:
+      enabled: true
+#  metrics: not now
+#    tags:
+#      application: ${spring.application.name}
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8072/eureka/
+info:
+  app:
+    name: "gatewayserver"
+    description: "Eazy Bank Gateway Server Application"
+    version: "1.0.0"
+
+server:
+  port: 8070
+
+logging:
+  level:
+    org.springframework.cloud.gateway.filter: DEBUG
+    io.joework: DEBUG

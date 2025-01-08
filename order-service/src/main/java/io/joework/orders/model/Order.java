@@ -35,6 +35,7 @@ public class Order {
 
     public void addItem(Item item){
         items.add(item);
+        totalPrice += item.getPricePerItem();
     }
 
     @Override
